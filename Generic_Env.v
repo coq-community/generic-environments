@@ -993,7 +993,7 @@ Proof. unfold all_binds; intros; auto. Qed.
 (**************************************************************************)
 (* This lemma should appear in a List module...                           *)
 Lemma list_length_S : forall A (l : list A) n,
-  length l = S n -> exists x, exists l', l = x :: l'.
+  length l = S n -> exists x:A, exists l', l = x :: l'.
 Proof.
   induction l as [ | a ]; intros n Hlen; simpl in *; inversion Hlen;
     exists a; exists l; auto.
