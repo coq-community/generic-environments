@@ -13,20 +13,22 @@ Set Implicit Arguments.
 (* ********************************************************************** *)
 (** * Module of an implementation of environments with lists              *)
 
-Require Import Generic_Var.
+Require Import Equalities.
 
-Module Core_Generic_Env_List_Def (Var : Generic_Var).
+Module CoreGenericEnvListDef (VarType : UsualDecidableType).
 
 Require Import List Bool.
 
-Import Var.
+Import VarType.
+
+Definition TVar := VarType.t.
 
 (* ---------------------------------------------------------------------- *)
 (** ** Definitions *)
 
 Definition gen_env A := list (TVar * A).
 
-Section Core_Definitions.
+Section CoreDefinitions.
 
 Variable A B : Type.
 Implicit Types x y : TVar.
@@ -36,7 +38,7 @@ Implicit Types vs ws : list A.
 Implicit Types E F G : gen_env A.
 Implicit Types f g : A -> B.
 
-Definition eq_keys_dec := Var.eq_var_dec.
+Definition eq_keys_dec := VarType.eq_dec.
 
 (** Preliminary properties of eq_keys_dec. *)
 
@@ -127,7 +129,7 @@ Inductive ok : gen_env A -> Prop :=
 | ok_cons : forall x v F, ok F ∧ notin x F -> ok (concat F (single x v))
 .
 
-End Core_Definitions.
+End CoreDefinitions.
 
 (** [x ∶ v] is the notation for a singleton environment mapping x to v. *)
 
@@ -1727,19 +1729,19 @@ Qed.
 
 End Properties.
 
-End Core_Generic_Env_List_Def.
+End CoreGenericEnvListDef.
 
 (** * Instantiation of Generic_Env with this implementation. *)
-Require Import Core_Generic_Env Generic_Env.
+Require Import CoreGenericEnv GenericEnv.
 
 (** Application of Core functor. *)
-Module Core_Generic_Env_List (Var : Generic_Var)
-  : Core_Generic_Env_Type Var
-  := Core_Generic_Env_List_Def Var.
+Module CoreGenericEnvList (VarType : UsualDecidableType)
+  : CoreGenericEnvironmentType VarType
+  := CoreGenericEnvListDef VarType.
 
 (** Extension of core implementation with the Extension functor. *)
-Module Generic_Env_List (Var : Generic_Var).
-  Module Core := Core_Generic_Env_List (Var).
-  Module Ext := Generic_Env_Type Var Core.
+Module GenericEnvironmentAsList (VarType : UsualDecidableType).
+  Module Core := CoreGenericEnvList VarType.
+  Module Ext := GenericEnvironmentType VarType Core.
   Import Ext.
-End Generic_Env_List.
+End GenericEnvironmentAsList.

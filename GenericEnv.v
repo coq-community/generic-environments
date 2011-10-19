@@ -13,19 +13,21 @@ Set Implicit Arguments.
 (* ********************************************************************** *)
 (** * Module of the extension of an implementation of environments        *)
 
-Require Import Generic_Var Core_Generic_Env.
+Require Import Equalities.
+Require Import CoreGenericEnv.
 
-Module Generic_Env_Type
-  (Var : Generic_Var) (Core_GE : Core_Generic_Env_Type (Var)).
+Module GenericEnvironmentType (VarType : UsualDecidableType)
+  (CoreGE : CoreGenericEnvironmentType (VarType)).
 
 Require Import List.
 Require Sets.Image.
 
-Import Var Core_GE.
+Import VarType CoreGE.
+Definition eq_var_dec := VarType.eq_dec.
 
 Local Open Scope gen_env_scope.
 
-Section Extended_Definitions.
+Section ExtendedDefinitions.
 
 Variable A : Type.
 
@@ -39,7 +41,7 @@ Definition all_binds (E F : gen_env A) :=
 (** Equivalence between environments *)
 Definition eq (E F : gen_env A) := all_binds E F ∧ all_binds F E.
 
-End Extended_Definitions.
+End ExtendedDefinitions.
 
 (** [x '∹' v '⋲' E] to be read x is bound to v in E. *)
 
@@ -128,7 +130,7 @@ Theorem binds_single_inv : forall A x y (v w: A),
   x = y ∧ v = w.
 Proof.
   intros A x y v w Hbind. inversion Hbind as [ Hget ].
-  destruct (eq_keys_dec x y) as [ Heq | Hneq ].
+  destruct (eq_var_dec x y) as [ Heq | Hneq ].
   rewrite Heq in *; clear x Heq.
   rewrite get_single_eq in Hget; auto. inversion Hget; auto.
   apply get_single_eq_inv in Hget. destruct Hget; contradiction.
@@ -1285,4 +1287,4 @@ Qed.
 
 End Properties.
 
-End Generic_Env_Type.
+End GenericEnvironmentType.

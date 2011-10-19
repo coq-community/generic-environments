@@ -13,12 +13,14 @@ Set Implicit Arguments.
 (* ********************************************************************** *)
 (** * Module Type of an implementation of environments                    *)
 
-Require Import Generic_Var.
+Require Import Equalities.
 
-Module Type Core_Generic_Env_Type (Var : Generic_Var).
+Module Type CoreGenericEnvironmentType (VarType : UsualDecidableType).
 
 Require Import List.
-Import Var.
+Import VarType.
+
+Definition TVar := VarType.t.
 
 (* ---------------------------------------------------------------------- *)
 (** ** Definitions and Notations *)
@@ -26,12 +28,12 @@ Import Var.
 (** gen_env A is an environment that binds variables to values of type A. *)
 Parameter gen_env : Type -> Type.
 
-Section Core_Definitions.
+Section CoreDefinitions.
 
 Variable A B : Type.
 
 (** The decidability of equality on keys (variables) is imported from Var.*)
-Definition eq_keys_dec := Var.eq_var_dec.
+Definition eq_keys_dec := VarType.eq_dec.
 
 (** Empty environment. *)
 Parameter empty : gen_env A.
@@ -76,7 +78,7 @@ Inductive ok : gen_env A -> Prop :=
 | ok_cons : forall x v F, ok F ∧ notin x F -> ok (concat F (single x v))
 .
 
-End Core_Definitions.
+End CoreDefinitions.
 
 (** [x ∶ v] is the notation for a singleton environment mapping x to v. *)
 
@@ -851,4 +853,4 @@ Axiom update_concat_l : forall A (E F G : gen_env A),
 
 End Properties.
 
-End Core_Generic_Env_Type.
+End CoreGenericEnvironmentType.
