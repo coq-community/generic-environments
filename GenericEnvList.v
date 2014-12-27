@@ -8,6 +8,7 @@
 ***************************************************************************)
 
 Require Import Utf8.
+Require List Bool.
 Set Implicit Arguments.
 
 (* ********************************************************************** *)
@@ -17,7 +18,7 @@ Require Import Equalities.
 
 Module CoreGenericEnvListDef (VarType : UsualDecidableType).
 
-Require Import List Bool.
+Import List Bool.
 
 Import VarType.
 

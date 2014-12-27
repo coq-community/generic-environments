@@ -14,10 +14,10 @@ Set Implicit Arguments.
 (** * Module Type of an implementation of environments                    *)
 
 Require Import Equalities.
+Require Import List.
 
 Module Type CoreGenericEnvironmentType (VarType : UsualDecidableType).
 
-Require Import List.
 Import VarType.
 
 Definition TVar := VarType.t.

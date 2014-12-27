@@ -15,12 +15,13 @@ Set Implicit Arguments.
 
 Require Import Equalities.
 Require Import CoreGenericEnv.
+Require List.
+Require Sets.Image.
 
 Module GenericEnvironmentType (VarType : UsualDecidableType)
   (CoreGE : CoreGenericEnvironmentType (VarType)).
 
-Require Import List.
-Require Sets.Image.
+Import List.
 
 Import VarType CoreGE.
 Definition eq_var_dec := VarType.eq_dec.
