@@ -1,9 +1,12 @@
 # Generic Environments
 
+[![CI][action-shield]][action-link]
 [![Contributing][contributing-shield]][contributing-link]
 [![Code of Conduct][conduct-shield]][conduct-link]
 [![Zulip][zulip-shield]][zulip-link]
 
+[action-shield]: https://github.com/coq-community/generic-environments/workflows/CI/badge.svg?branch=master
+[action-link]: https://github.com/coq-community/generic-environments/actions?query=workflow%3ACI
 
 [contributing-shield]: https://img.shields.io/badge/contributions-welcome-%23f7931e.svg
 [contributing-link]: https://github.com/coq-community/manifesto/blob/master/CONTRIBUTING.md
@@ -26,6 +29,7 @@ Generic Environments is a library which provides an abstract data type of enviro
 - Coq-community maintainer(s):
   - Mohammad-Ali A'RÂBI ([**@aerabi**](https://github.com/aerabi))
 - License: [MIT license](LICENSE)
+- Compatible Coq versions: Coq 8.4 or higher
 - Additional dependencies: none
 - Coq namespace: `GenericEnvironments`
 - Related publication(s):
