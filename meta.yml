@@ -1,0 +1,33 @@
+fullname: Generic Environments
+shortname: generic-environments
+organization: coq-community
+community: true
+synopsis: Generic Environments is a library that provides an abstract data type for environments
+description: >
+  Generic Environments is a library which provides an abstract data
+  type of environments, as a functor parameterized by a module
+  defining variables, and a function which builds environments for
+  such variables with any Type of type. Usual operations over
+  environments are defined, along with an extensive set of basic and
+  more advanced properties. Moreover, an implementation using lists
+  satisfying and all the required properties is provided.
+authors:
+  - name: Emmanuel Polonowski
+    initial: true
+    email: emmanuel.polonowski@u-pec.fr
+maintainers:
+  - name: Mohammad-Ali A'RÂBI
+    nickname: aerabi
+license:
+  fullname: MIT license
+  identifier: MIT
+namespace: GenericEnvironments
+publications:
+  - pub_title: Generic Environments in Coq
+    pub_url: https://hal.archives-ouvertes.fr/hal-00648397
+keywords:
+  - name: generic environments
+  - name: typing
+  - name: type theory
+categories:
+  - name: Mathematics/Logic/Type theory
